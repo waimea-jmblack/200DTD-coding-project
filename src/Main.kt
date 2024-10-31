@@ -32,15 +32,31 @@ fun main() {
     println("----------------------------------------------------------------------")
     println("Welcome to Explorers Valley! Collect 15 explorers and 100 gold to win!")
     println("Good luck players :)")
-    val players = initializePlayers()
 
-    while (players.none { it.explorers >= 15 && it.gold >= 100 }) {
-        players.forEachIndexed { index, player ->
-            playerTurn(player, "Player ${index + 1}")
-            if (player.explorers >= 15 && player.gold >= 100) {
-                println("Congratulations, Player ${index + 1}! You win with ${player.explorers} explorers and ${player.gold} gold!")
-                return
-            }
+    val players = initializePlayers()
+    var currentPlayerNum = 0
+
+    while (true) {
+        val currentPlayer = players[currentPlayerNum]
+        val currentPlayerName = "Player ${currentPlayerNum + 1}"
+
+        // Player takes their turn
+        playerTurn(currentPlayer, currentPlayerName)
+
+        // Has the player won?
+        if (currentPlayer.explorers >= 15 && currentPlayer.gold >= 100) {
+            println("Congratulations, $currentPlayerName!")
+            println("You win with ${currentPlayer.explorers} explorers and ${currentPlayer.gold} gold!")
+            break
+        }
+
+        // Go to next player
+        currentPlayerNum++
+
+        // Have we got to the last player?
+        if (currentPlayerNum == players.size) {
+            // Yes, so back to the first
+            currentPlayerNum = 0
         }
     }
 }
@@ -60,30 +76,53 @@ fun playerTurn(player: Player, playerName: String) {
     }
 }
 
+//-----------------------------------Easy Challenge-----------------------------------//
 fun guessNumber(player: Player) {
+
     val target = Random.nextInt(1, 3)
+
+    // Asking for the player to guess between 1-2 for an easy question
+    println("---------------")
+    println("Easy Challenge ")
     println("Guess a number (1 or 2): ")
     val guess = readLine()?.toIntOrNull()
 
+    // If correct
     if (guess == target) {
         player.explorers += 1
         player.gold += 10
         println("Correct! Gain 1 explorer and 10 gold.")
+
+    // If incorrect
     } else {
-        println("Wrong! It was $target. ${if (Random.nextBoolean()) "Lost 1 explorer!" else "Kept explorers!"}")
-        if (Random.nextBoolean()) player.explorers--
+        println("Wrong! It was $target")
+        if (Random.nextBoolean()) {
+            println("Lost 1 explorer!")
+            player.explorers--
+        }
+        else {
+            println("Kept explorers!")
+        }
     }
 }
 
+//-----------------------------------Hard Challenge-----------------------------------//
 fun hardChallenge(player: Player) {
     val target = Random.nextInt(1, 4)
+
+    // Asking for the player to guess between 1-3 for a hard question
+    println("---------------")
+    println("Hard Challenge ")
     println("Guess a number (1-3): ")
     val guess = readLine()?.toIntOrNull()
 
+    // If correct...
     if (guess == target) {
         player.explorers += 3
         player.gold += 30
         println("Correct! Gain 3 explorers and 30 gold.")
+
+    // If incorrect...
     } else {
         println("Wrong! It was $target. Lost 1 explorer and 20 gold.")
         player.explorers--
