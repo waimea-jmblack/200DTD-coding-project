@@ -5,7 +5,7 @@
  *
  * by James Black
  *
- *The game is about chance and strategy. You and another player both start with 10 explorers. With a goal of getting 20 explorers and 200 gold.
+ *The game is about chance and strategy. You and another player both start with 10 explorers. With a goal of getting 15 explorers and 100 gold, without losing all your explorers.
  * For the main quest the users will pick a number (either 1 or 2), then the computer picks a random number from these two numbers.
  * If the user guesses right, then they will be rewarded 10 gold. if they guess wrong they there will be a 50/50 chance they lose an explorer.
  * There will also be random hard challenges, that could offer high reward but higher risk as well.
@@ -16,7 +16,10 @@
  *
  * the strategy of this game is that you could bet against the opposite player when it is their turn.
  * This will be done by you picking a different number that the opposition did not choose.
- * Meaning that if the opposition gets their number wrong and the user got it right while betting against them, gets the reward while the opposition loses the set amount, and vice versa.
+ * Meaning that if the opposition gets their number wrong and the user got it right while betting against them,
+ * gets the reward while the opposition loses the set amount, and vice versa.
+ *
+ * Note: I might not include this last paragraph as it might be too hard and tedious to code into the already complicated game.;
  * ------------------------------------------------------------------------
  */
 
